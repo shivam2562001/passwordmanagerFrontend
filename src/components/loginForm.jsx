@@ -22,15 +22,43 @@ class LoginForm extends Form {
   doSubmit = async() => {   
      try {
        const { data } = this.state;
-       await login(data.email, data.password);
+       const response = await login(data.email, data.password);
+       if (response)
+         toast.success("Login success Wait redirecting...", {
+           position: "top-right",
+           autoClose: 5000,
+           hideProgressBar: false,
+           closeOnClick: true,
+           pauseOnHover: true,
+           draggable: true,
+           progress: undefined,
+         });
+       else
+         toast("Unauthorized or failure Login!!", {
+           position: "top-right",
+           autoClose: 5000,
+           hideProgressBar: false,
+           closeOnClick: true,
+           pauseOnHover: true,
+           draggable: true,
+           progress: undefined,
+         });
        const { state } = this.props.location;
-       console.log(state);
        window.location = state ? state.from.pathname : "/";
      } catch (ex) {
        if (ex.response && ex.response.status === 400) {
          const errors = { ...this.state.errors };
          errors.username = ex.response.data;
          this.setState({ errors });
+         toast("something wrong", {
+           position: "top-right",
+           autoClose: 5000,
+           hideProgressBar: false,
+           closeOnClick: true,
+           pauseOnHover: true,
+           draggable: true,
+           progress: undefined,
+         });
        }
      }
   };

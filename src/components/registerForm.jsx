@@ -26,6 +26,26 @@ class RegisterForm extends Form {
   doSubmit = async() => {
     try {
       const response = await userService.Register(this.state.data);
+      if (response)
+        toast.success("user registered successfully", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      else
+        toast("something went wrong", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
      auth.loginWithJwt(response.headers["x-auth-token"]);
        window.location = "/";
     } catch (ex) {
@@ -33,6 +53,15 @@ class RegisterForm extends Form {
         const errors = { ...this.state.errors };
         errors.username = ex.response.data;
         this.setState({ errors });
+         toast("something went wrong", {
+           position: "top-right",
+           autoClose: 5000,
+           hideProgressBar: false,
+           closeOnClick: true,
+           pauseOnHover: true,
+           draggable: true,
+           progress: undefined,
+         });
       }
     }
   };
