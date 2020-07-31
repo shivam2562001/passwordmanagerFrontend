@@ -2,7 +2,8 @@ import React from "react";
 import Joi from "joi-browser";
 import Form from "./common/form";
 import {login} from '../services/authService';
-import { toast } from "react-toastify";
+import { Redirect } from "react-router-dom";
+import auth from "../services/authService";
 class LoginForm extends Form {
   state = {
     data: { email: "", password: "" },
@@ -22,35 +23,20 @@ class LoginForm extends Form {
      try {
        const { data } = this.state;
        await login(data.email, data.password);
-         toast.success("login success wait...", {
-           position: "top-right",
-           autoClose: 5000,
-           hideProgressBar: false,
-           closeOnClick: true,
-           pauseOnHover: true,
-           draggable: true,
-           progress: undefined,
-         });
-     this.props.history.push("/home");
+       const { state } = this.props.location;
+       console.log(state);
+       window.location = state ? state.from.pathname : "/";
      } catch (ex) {
        if (ex.response && ex.response.status === 400) {
          const errors = { ...this.state.errors };
          errors.username = ex.response.data;
          this.setState({ errors });
-           toast.danger("Login failure", {
-             position: "top-right",
-             autoClose: 5000,
-             hideProgressBar: false,
-             closeOnClick: true,
-             pauseOnHover: true,
-             draggable: true,
-             progress: undefined,
-           });
        }
      }
   };
 
   render() {
+    if (auth.getCurrentUser()) return <Redirect to="/" />;
     return (
       <>
         <br />
