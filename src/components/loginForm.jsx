@@ -34,7 +34,9 @@ class LoginForm extends Form {
 
   render() {
     return (
-      <div>
+      <>
+        <br />
+        <div className="container-fluid p-5">
         <h1>Login</h1>
         <form onSubmit={this.handleSubmit}>
           {this.renderInput("email", "Email")}
@@ -42,6 +44,7 @@ class LoginForm extends Form {
           {this.renderButton("Login")}
         </form>
       </div>
+      </>
     );
   }
 }

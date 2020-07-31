@@ -39,7 +39,9 @@ class RegisterForm extends Form {
 
   render() {
     return (
-      <div>
+     <>
+        <br />
+        <div className="container-fluid p-5">
         <h1>Register</h1>
         <form onSubmit={this.handleSubmit}>
           {this.renderInput("name", "Username")}
@@ -48,6 +50,7 @@ class RegisterForm extends Form {
           {this.renderButton("Register")}
         </form>
       </div>
+      </>
     );
   }
 }
