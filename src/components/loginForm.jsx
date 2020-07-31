@@ -34,16 +34,6 @@ class LoginForm extends Form {
            draggable: true,
            progress: undefined,
          });
-       else
-         toast("Unauthorized or failure Login!!", {
-           position: "top-right",
-           autoClose: 5000,
-           hideProgressBar: false,
-           closeOnClick: true,
-           pauseOnHover: true,
-           draggable: true,
-           progress: undefined,
-         });
        const { state } = this.props.location;
        window.location = state ? state.from.pathname : "/";
      } catch (ex) {
