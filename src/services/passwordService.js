@@ -7,7 +7,6 @@ const deleteApiEndpoint = "https://passmanager256.herokuapp.com/deletepassword";
 const config = {
   headers: {
     "Content-Type": "application/x-www-form-urlencoded",
-    "Access-Control-Allow-Origin": "*",
   },
 };
 

@@ -5,7 +5,6 @@ const apiEndpoint = "https://passmanager256.herokuapp.com/signup";
 const config = {
   headers: {
     "Content-Type": "application/x-www-form-urlencoded",
-    "Access-Control-Allow-Origin": "*"
   },
 };
 
