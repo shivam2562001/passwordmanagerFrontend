@@ -21,12 +21,30 @@ class LoginForm extends Form {
      try {
        const { data } = this.state;
        await login(data.email, data.password);
-     this.props.history.push("/allpasswords");
+         toast.success("login success wait...", {
+           position: "top-right",
+           autoClose: 5000,
+           hideProgressBar: false,
+           closeOnClick: true,
+           pauseOnHover: true,
+           draggable: true,
+           progress: undefined,
+         });
+     this.props.history.push("/home");
      } catch (ex) {
        if (ex.response && ex.response.status === 400) {
          const errors = { ...this.state.errors };
          errors.username = ex.response.data;
          this.setState({ errors });
+           toast.danger("Login failure", {
+             position: "top-right",
+             autoClose: 5000,
+             hideProgressBar: false,
+             closeOnClick: true,
+             pauseOnHover: true,
+             draggable: true,
+             progress: undefined,
+           });
        }
      }
   };
